@@ -140,20 +140,25 @@ function median(sortedArr) {
   }
 }
 
-  //computes ages and sorts them for statistics
-  const ages = employees.map(e => getAgeFloat(e.birthdate));
-  const agesCopy = ages.slice();
+const ages = employees.map(e => getAgeFloat(e.birthdate));
+const sortedAges = [...ages].sort((a, b) => a - b);
+  
+const sortedWorkloads = employees
+    .map(e => e.workload)
+    .sort((a, b) => a - b);
 
-  //extracts and sorts workloads
-  const sortedAges = agesCopy.sort((a, b) => a - b);
-  const sortedWorkloads = employees.map(e => e.workload).sort((a, b) => a - b);
+//average age
+const avgAge = ages.reduce((sum, a) => sum + a, 0) / ages.length;
 
-  //average age
-  const avgAge = ages.reduce((sum, a) => sum + a, 0) / ages.length;
-
-  //female employees' workloads
-  const womenWorkloads = employees.filter(e => e.gender === "female").map(e => e.workload);
-  const avgWomenWorkload = womenWorkloads.reduce((sum, w) => sum + w, 0) / womenWorkloads.length;
+//female employees' workloads
+const womenWorkloads = employees.filter(e => e.gender === "female").map(e => e.workload);
+let avgWomenWorkload;
+if (womenWorkloads.length > 0) {
+  avgWomenWorkload =
+   womenWorkloads.reduce((sum, w) => sum + w, 0) / womenWorkloads.length;
+} else {
+  avgWomenWorkload = 0;
+}
   
   const workloadCount = {
     10: 0,
