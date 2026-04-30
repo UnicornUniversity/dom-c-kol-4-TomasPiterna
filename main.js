@@ -141,7 +141,8 @@ function median(sortedArr) {
 }
 
   const ages = employees.map(e => getAgeFloat(e.birthdate));
-  const sortedAges = [...ages].sort((a, b) => a - b);
+  const agesCopy = ages.slice();
+  const sortedAges = agesCopy.sort((a, b) => a - b);
   const sortedWorkloads = employees.map(e => e.workload).sort((a, b) => a - b);
 
   const avgAge = ages.reduce((sum, a) => sum + a, 0) / ages.length;
