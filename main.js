@@ -1,8 +1,8 @@
-//TODO add imports if needed
-//TODO doc
 /**
  * The main function which calls the application. 
- * Please, add specific description here for the application purpose.
+ * This is the main function of the application. It takes the input data and
+ * calls generateEmployeeData to create a list of employees, then calls
+ * getEmployeeStatistics to calculate statistics about them and returns the result.
  * @param {object} dtoIn contains count of employees, age limit of employees {min, max}
  * @returns {object} containing the statistics
  */
@@ -10,8 +10,6 @@ export function main(dtoIn) {
 
   const employees  = generateEmployeeData(dtoIn);
   const dtoOut = getEmployeeStatistics(employees);
-  
-  //let dtoOut = exMain(dtoIn);
   return dtoOut;
 }
 
@@ -22,10 +20,7 @@ export function main(dtoIn) {
  * @returns {Array} of employees
  */
 export function generateEmployeeData(dtoIn) {
-
-
-
-
+  
  //male names and surnames
   const maleNames = [
     "Tomas", "Jan", "Ozzy", "Martin", "Lukas",
