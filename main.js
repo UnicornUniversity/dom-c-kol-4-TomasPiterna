@@ -149,13 +149,23 @@ function median(sortedArr) {
 
   const womenWorkloads = employees.filter(e => e.gender === "female").map(e => e.workload);
   const avgWomenWorkload = womenWorkloads.reduce((sum, w) => sum + w, 0) / womenWorkloads.length;
+  const workloadCount = {
+    10: 0,
+    20: 0,
+    30: 0,
+    40: 0
+  };
 
+  employees.forEach(e => {
+    workloadCount[e.workload]++;
+  });
+  
   const dtoOut = {
     total: employees.length,
-    workload10: employees.filter(e => e.workload === 10).length,
-    workload20: employees.filter(e => e.workload === 20).length,
-    workload30: employees.filter(e => e.workload === 30).length,
-    workload40: employees.filter(e => e.workload === 40).length,
+    workload10: workloadCount[10],
+    workload20: workloadCount[20],
+    workload30: workloadCount[30],
+    workload40: workloadCount[40],
     averageAge: Math.round(avgAge * 10) / 10,
     minAge: Math.floor(Math.min(...ages)),
     maxAge: Math.floor(Math.max(...ages)),
