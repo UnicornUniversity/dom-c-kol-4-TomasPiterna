@@ -76,7 +76,6 @@ export function generateEmployeeData(dtoIn) {
     const randomDate = new Date(randomMs);
     return randomDate.toISOString();
   }
-  //empty array to store generated employees
   const dtoOut = [];
 
   //generate one employee at a time, repeat dtoIn.count times
@@ -125,12 +124,13 @@ export function generateEmployeeData(dtoIn) {
  */
 export function getEmployeeStatistics(employees) {
 
+//converts birthdate to age in years
 function getAgeFloat(birthdate) {
   const ms = Date.now() - new Date(birthdate).getTime();
   return ms / (365.25 * 24 * 60 * 60 * 1000);
 }
 
-
+//returns median value from a sorted array
 function median(sortedArr) {
   const mid = Math.floor(sortedArr.length / 2);
  if (sortedArr.length % 2 !== 0) {
@@ -140,15 +140,21 @@ function median(sortedArr) {
   }
 }
 
+  //computes ages and sorts them for statistics
   const ages = employees.map(e => getAgeFloat(e.birthdate));
   const agesCopy = ages.slice();
+
+  //extracts and sorts workloads
   const sortedAges = agesCopy.sort((a, b) => a - b);
   const sortedWorkloads = employees.map(e => e.workload).sort((a, b) => a - b);
 
+  //average age
   const avgAge = ages.reduce((sum, a) => sum + a, 0) / ages.length;
 
+  //female employees' workloads
   const womenWorkloads = employees.filter(e => e.gender === "female").map(e => e.workload);
   const avgWomenWorkload = womenWorkloads.reduce((sum, w) => sum + w, 0) / womenWorkloads.length;
+  
   const workloadCount = {
     10: 0,
     20: 0,
@@ -159,7 +165,8 @@ function median(sortedArr) {
   employees.forEach(e => {
     workloadCount[e.workload]++;
   });
-  
+
+  //builds output with all computed statistics
   const dtoOut = {
     total: employees.length,
     workload10: workloadCount[10],
