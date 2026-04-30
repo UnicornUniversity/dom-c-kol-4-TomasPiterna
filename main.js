@@ -133,9 +133,11 @@ function getAgeFloat(birthdate) {
 
 function median(sortedArr) {
   const mid = Math.floor(sortedArr.length / 2);
-  return sortedArr.length % 2 !== 0
-    ? sortedArr[mid]
-    : (sortedArr[mid - 1] + sortedArr[mid]) / 2;
+ if (sortedArr.length % 2 !== 0) {
+    return sortedArr[mid];
+  } else {
+    return (sortedArr[mid - 1] + sortedArr[mid]) / 2;
+  }
 }
 
   const ages = employees.map(e => getAgeFloat(e.birthdate));
