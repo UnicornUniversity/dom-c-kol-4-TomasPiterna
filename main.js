@@ -117,7 +117,11 @@ export function generateEmployeeData(dtoIn) {
 
     dtoOut.push(employee);
   }
- 
+
+
+
+
+  
   //let dtoOut = exGenerateEmployeeData(dtoIn);
   return dtoOut;
 }
@@ -128,7 +132,47 @@ export function generateEmployeeData(dtoIn) {
  * @returns {object} statistics of the employees
  */
 export function getEmployeeStatistics(employees) {
-  //TODO code
+
+
+
+
+function getAgeFloat(birthdate) {
+  const ms = Date.now() - new Date(birthdate).getTime();
+  return ms / (365.25 * 24 * 60 * 60 * 1000);
+}
+
+
+function median(sortedArr) {
+  const mid = Math.floor(sortedArr.length / 2);
+  return sortedArr.length % 2 !== 0
+    ? sortedArr[mid]
+    : (sortedArr[mid - 1] + sortedArr[mid]) / 2;
+}
+
+  const ages = employees.map(e => getAgeFloat(e.birthdate));
+  const sortedAges = [...ages].sort((a, b) => a - b);
+  const sortedWorkloads = employees.map(e => e.workload).sort((a, b) => a - b);
+
+  const avgAge = ages.reduce((sum, a) => sum + a, 0) / ages.length;
+
+  const womenWorkloads = employees.filter(e => e.gender === "female").map(e => e.workload);
+  const avgWomenWorkload = womenWorkloads.reduce((sum, w) => sum + w, 0) / womenWorkloads.length;
+
+  const dtoOut = {
+    total: employees.length,
+    workload10: employees.filter(e => e.workload === 10).length,
+    workload20: employees.filter(e => e.workload === 20).length,
+    workload30: employees.filter(e => e.workload === 30).length,
+    workload40: employees.filter(e => e.workload === 40).length,
+    averageAge: Math.round(avgAge * 10) / 10,
+    minAge: Math.round(Math.min(...ages)),
+    maxAge: Math.round(Math.max(...ages)),
+    medianAge: Math.round(median(sortedAges)),
+    medianWorkload: median(sortedWorkloads),
+    averageWomenWorkload: Math.round(avgWomenWorkload * 10) / 10,
+    sortedByWorkload: [...employees].sort((a, b) => a.workload - b.workload)
+  };
+  
   //let dtoOut = exGetEmployeeStatistics(employees);
   return dtoOut;
 }
