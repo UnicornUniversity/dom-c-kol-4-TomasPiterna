@@ -154,9 +154,9 @@ function median(sortedArr) {
     workload30: employees.filter(e => e.workload === 30).length,
     workload40: employees.filter(e => e.workload === 40).length,
     averageAge: Math.round(avgAge * 10) / 10,
-    minAge: Math.round(Math.min(...ages)),
-    maxAge: Math.round(Math.max(...ages)),
-    medianAge: Math.round(median(sortedAges)),
+    minAge: Math.floor(Math.min(...ages)),
+    maxAge: Math.floor(Math.max(...ages)),
+    medianAge: Math.floor(median(sortedAges)),
     medianWorkload: median(sortedWorkloads),
     averageWomenWorkload: Math.round(avgWomenWorkload * 10) / 10,
     sortedByWorkload: [...employees].sort((a, b) => a.workload - b.workload)
