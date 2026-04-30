@@ -1,5 +1,4 @@
 /**
- * The main function which calls the application. 
  * This is the main function of the application. It takes the input data and
  * calls generateEmployeeData to create a list of employees, then calls
  * getEmployeeStatistics to calculate statistics about them and returns the result.
@@ -113,23 +112,18 @@ export function generateEmployeeData(dtoIn) {
     dtoOut.push(employee);
   }
 
-
-
-
-  
-  //let dtoOut = exGenerateEmployeeData(dtoIn);
   return dtoOut;
 }
 
 /**
- * Please, add specific description here 
+ * This function takes the list of generated employees and calculates the following statistics:
+ * total number of employees, number of employees for each workload (10, 20, 30, 40 hours per week),
+ * average age, minimum age, maximum age, median age, median workload,
+ * average workload of female employees and a list of all employees sorted by workload.
  * @param {Array} employees containing all the mocked employee data
  * @returns {object} statistics of the employees
- */
+*/
 export function getEmployeeStatistics(employees) {
-
-
-
 
 function getAgeFloat(birthdate) {
   const ms = Date.now() - new Date(birthdate).getTime();
@@ -168,6 +162,5 @@ function median(sortedArr) {
     sortedByWorkload: [...employees].sort((a, b) => a.workload - b.workload)
   };
   
-  //let dtoOut = exGetEmployeeStatistics(employees);
   return dtoOut;
 }
