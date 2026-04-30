@@ -122,7 +122,7 @@ export function generateEmployeeData(dtoIn) {
  * average workload of female employees and a list of all employees sorted by workload.
  * @param {Array} employees containing all the mocked employee data
  * @returns {object} statistics of the employees
-*/
+ */
 export function getEmployeeStatistics(employees) {
 
 function getAgeFloat(birthdate) {
